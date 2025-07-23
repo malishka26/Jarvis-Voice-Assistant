@@ -96,20 +96,20 @@ def main_process():
             request = request.replace("search google ", "")
             webbrowser.open("https://www.google.com/search?q="+request)
         elif "send whatsapp" in request:
-            pwk.sendwhatmsg("+918829932535", "Hi, How are you", 22, 45, 30)
+            pwk.sendwhatmsg("+911019937825", "Hi, How are you", 22, 45, 30)
             
 
         elif "send email" in request:
             try:
                 s = smtplib.SMTP('smtp.gmail.com', 587)
                 s.starttls()
-                s.login("malishkapancholi@gmail.com", user_config.gmail_password)
+                s.login("abc@gmail.com", user_config.gmail_password)
                 message = """
                 This is the message.
 
                 Thanks .
                 """
-                s.sendmail("malishkapancholi@gmail.com", "mahiprajapat683@gmail.com", message)
+                s.sendmail("abc@gmail.com", "def@gmail.com", message)
                 s.quit()
                 speak("Email sent")
             except Exception as e:
