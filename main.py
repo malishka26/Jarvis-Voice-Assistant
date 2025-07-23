@@ -9,8 +9,7 @@ import wikipedia
 import pywhatkit as pwk
 import user_config
 import smtplib, ssl
-import openai_request as ai
-import image_generation
+
 import mtranslate
 
 engine = pyttsx3.init()
@@ -73,8 +72,8 @@ def main_process():
             with open ("todo.txt", "r") as file:
                 speak("Work we have to do today is : " + file.read())
         elif "show work" in request:
-            with open ("todo.txt", "r") as file: excel
-            tasks = file.read()
+            with open ("todo.txt", "r") as file: 
+                tasks = file.read()
             notification.notify(
                 title = "Today's work",
                 message = tasks
@@ -97,48 +96,28 @@ def main_process():
             request = request.replace("search google ", "")
             webbrowser.open("https://www.google.com/search?q="+request)
         elif "send whatsapp" in request:
-            pwk.sendwhatmsg("+910123456789", "Hi, How are you", 2, 10, 30)
-        # elif "send email" in request:
-        #     pwk.send_mail("xxxxx@xgmail.com", user_config.gmail_password, "Hello", "Hello, How are you", "xxxxx@xgmail.com")
-        #     speak("Email sent")
+            pwk.sendwhatmsg("+918829932535", "Hi, How are you", 22, 45, 30)
+            
+
         elif "send email" in request:
-            s = smtplib.SMTP('smtp.gmail.com', 587)
-            s.starttls()
-            s.login("malishkapancholi@gmail.com", user_config.gmail_password)
-            message = """
-            This is the message.
+            try:
+                s = smtplib.SMTP('smtp.gmail.com', 587)
+                s.starttls()
+                s.login("malishkapancholi@gmail.com", user_config.gmail_password)
+                message = """
+                This is the message.
 
-            Good day!
-
-            """
-            s.sendmail("malishkapancholi@gmail.com", "lata571983@gmail.com", message)
-            s.quit()
-            speak("Email sent")
-        elif "image" in request:
-            request = request.replace("jarvis ", "")
-            image_generation.generate_image(request)
-        elif "ask ai" in request:
-            jarvis_chat = []
-            request = request.replace("jarvis ", "")
-            request = request.replace("ask ai ", "")
-            jarvis_chat.append({"role": "user","content": request})
-
-            response = ai.send_request(jarvis_chat)
-
-            speak(response)
-        elif "clear chat" in request:
-            jarvis_chat = []
-            speak("Chat Cleared")
-        else:
-            request = request.replace("jarvis ", "")
-
-            jarvis_chat.append({"role": "user","content": request})
-            response = ai.send_request(jarvis_chat)
-
-            jarvis_chat.append({"role": "assistant", "content": response})
-            speak(response)
-
+                Thanks .
+                """
+                s.sendmail("malishkapancholi@gmail.com", "mahiprajapat683@gmail.com", message)
+                s.quit()
+                speak("Email sent")
+            except Exception as e:
+                speak("Failed to send email.")
 
 
 if __name__ == "__main__":
     main_process()
+
+
+
